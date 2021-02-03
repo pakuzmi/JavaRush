@@ -26,14 +26,16 @@ public class ConsoleHelper {
 
     public static int readInt(){
         int result = -1;
-        while (true){
-            try {
+        try {
+            result = Integer.parseInt(readString());
+        } catch (NumberFormatException e){
+            System.out.println("Произошла ошибка при попытке ввода числа. Попробуйте еще раз.");
+            try{
                 result = Integer.parseInt(readString());
-                return result;
-            } catch (NumberFormatException e){
-                System.out.println("Произошла ошибка при попытке ввода числа. Попробуйте еще раз.");
+            } catch (NumberFormatException e1){
+                System.out.println(e1.getMessage());
             }
         }
+        return result;
     }
-
 }
