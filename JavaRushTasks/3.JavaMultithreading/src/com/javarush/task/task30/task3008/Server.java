@@ -39,6 +39,18 @@ public class Server {
                 }
             }
         }
+
+        private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException{
+            while(true){
+                Message recieveMessage = connection.receive();
+                if (recieveMessage.getType() == MessageType.TEXT){
+                    String sendMessage = userName + ": " + recieveMessage.getData();
+                    sendBroadcastMessage(new Message(MessageType.TEXT, sendMessage));
+                } else {
+                    ConsoleHelper.writeMessage("Сообщение не является текстом.");
+                }
+            }
+        }
     }
 
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
