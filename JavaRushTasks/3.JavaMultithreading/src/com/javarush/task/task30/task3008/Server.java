@@ -12,6 +12,24 @@ public class Server {
         public Handler(Socket socket){
             this.socket = socket;
         }
+
+        private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException{
+            Message requestMessage = new Message(MessageType.NAME_REQUEST);
+            String userName;
+            while (true){
+                connection.send(requestMessage);
+                Message recieveMessage = connection.receive();
+                if (recieveMessage.getType().equals(MessageType.USER_NAME)){
+                    userName = recieveMessage.getData();
+                    if (userName != null && !userName.equals("") && !connectionMap.containsKey(userName)){
+                        connectionMap.put(userName, connection);
+                        connection.send(new Message(MessageType.NAME_ACCEPTED));
+                        break;
+                    }
+                }
+            }
+            return  userName;
+        }
     }
 
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
