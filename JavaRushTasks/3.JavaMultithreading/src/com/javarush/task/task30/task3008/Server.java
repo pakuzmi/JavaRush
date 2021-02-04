@@ -30,13 +30,21 @@ public class Server {
             }
             return  userName;
         }
+
+        private void notifyUsers(Connection connection, String userName) throws IOException{
+            for (Map.Entry<String, Connection> entry : connectionMap.entrySet()){
+                String clientName = entry.getKey();
+                if (!clientName.equals(userName)){
+                    connection.send(new Message(MessageType.USER_ADDED, clientName));
+                }
+            }
+        }
     }
 
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {
         int serverPort = ConsoleHelper.readInt();
-
         try {
             ServerSocket socket = new ServerSocket(serverPort);
             System.out.println("Сервер запущен.");
