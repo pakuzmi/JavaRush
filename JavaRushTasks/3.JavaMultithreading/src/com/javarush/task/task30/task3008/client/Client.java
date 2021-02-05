@@ -28,6 +28,36 @@ public class Client {
                 Client.this.notify();
             }
         }
+        protected void clientHandshake() throws IOException, ClassNotFoundException{
+            while (true){
+                Message inputMessage;
+                inputMessage = connection.receive();
+                if (inputMessage.getType() == MessageType.NAME_REQUEST){
+                    String userName = getUserName();
+                    connection.send(new Message(MessageType.USER_NAME, userName));
+                } else if (inputMessage.getType() == MessageType.NAME_ACCEPTED){
+                    notifyConnectionStatusChanged(true);
+                    return;
+                } else {
+                    throw new IOException("Unexpected MessageType");
+                }
+            }
+        }
+
+        protected void clientMainLoop() throws IOException, ClassNotFoundException{
+            while (true){
+                Message inputMessage = connection.receive();
+                if (inputMessage.getType() == MessageType.TEXT){
+                    processIncomingMessage(inputMessage.getData());
+                } else if (inputMessage.getType() == MessageType.USER_ADDED){
+                    informAboutAddingNewUser(inputMessage.getData());
+                } else if (inputMessage.getType() == MessageType.USER_REMOVED){
+                    informAboutDeletingNewUser(inputMessage.getData());
+                } else {
+                    throw new IOException("Unexpected MessageType");
+                }
+            }
+        }
     }
 
 
