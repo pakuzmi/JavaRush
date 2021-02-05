@@ -5,9 +5,7 @@ import com.javarush.task.task30.task3008.ConsoleHelper;
 import com.javarush.task.task30.task3008.Message;
 import com.javarush.task.task30.task3008.MessageType;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Client {
     protected Connection connection;
@@ -48,5 +46,38 @@ public class Client {
             ConsoleHelper.writeMessage(e.getMessage());
             clientConnected = false;
         }
+    }
+
+    public void run(){
+        SocketThread socketThread = getSocketThread();
+        socketThread.setDaemon(true);
+        socketThread.start();
+        synchronized (this){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                ConsoleHelper.writeMessage("Возникло исключение.");
+            }
+        }
+        if (clientConnected){
+            ConsoleHelper.writeMessage("Соединение установлено.");
+            ConsoleHelper.writeMessage("Для выхода наберите команду 'exit'.");
+            while (clientConnected){
+                String input = ConsoleHelper.readString();
+                if (input.equals("exit")){
+                    break;
+                }
+                if (shouldSendTextFromConsole()){
+                    sendTextMessage(input);
+                }
+            }
+        } else {
+            ConsoleHelper.writeMessage("Произошла ошибка во время работы клиента.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Client client = new Client();
+        client.run();
     }
 }
