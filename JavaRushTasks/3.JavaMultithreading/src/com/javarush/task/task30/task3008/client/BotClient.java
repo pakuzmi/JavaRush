@@ -93,6 +93,14 @@ public class BotClient extends Client{
     }
 
     public static void main(String[] args) {
+        Calendar calendar = new GregorianCalendar();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("H:mm:ss");
+        String dateFormatted = simpleDateFormat.format(calendar.getTime());
+        String userName = "Боб";
+        System.out.println(String.format("Информация для %s: %s", userName, dateFormatted));
+
+
+
         BotClient botClient = new BotClient();
         botClient.run();
     }
