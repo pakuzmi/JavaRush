@@ -16,7 +16,6 @@ public class ClientGuiView {
     public ClientGuiView(ClientGuiController controller) {
         this.controller = controller;
         initView();
-
     }
 
     private void initView() {
