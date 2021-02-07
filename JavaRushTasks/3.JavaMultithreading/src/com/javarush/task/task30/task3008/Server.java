@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.sql.SQLOutput;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -77,6 +78,7 @@ public class Server {
     private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {
+        System.out.println("Для запуска сервера введите номер порта.");
         int serverPort = ConsoleHelper.readInt();
         try {
             ServerSocket socket = new ServerSocket(serverPort);
