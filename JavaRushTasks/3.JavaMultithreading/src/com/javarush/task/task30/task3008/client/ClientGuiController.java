@@ -45,6 +45,7 @@ public class ClientGuiController extends Client{
     @Override
     protected int getServerPort() {
         return view.getServerPort();
+
     }
 
     @Override
