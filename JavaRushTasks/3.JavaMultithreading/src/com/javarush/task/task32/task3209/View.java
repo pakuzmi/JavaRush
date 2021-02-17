@@ -5,6 +5,7 @@ import com.javarush.task.task32.task3209.listeners.TabbedPaneChangeListener;
 import com.javarush.task.task32.task3209.listeners.UndoListener;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLDocument;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -120,5 +121,19 @@ public class View extends JFrame implements ActionListener {
 
     public boolean isHtmlTabSelected(){
         return tabbedPane.getSelectedIndex() == 0;
+    }
+
+    public void selectHtmlTab(){
+        tabbedPane.setSelectedIndex(0);
+        resetUndo();
+    }
+
+    public void update(){
+        HTMLDocument document = controller.getDocument();
+        htmlTextPane.setDocument(document);
+    }
+
+    public void showAbout(){
+        JOptionPane.showMessageDialog(this, "Эту программу разработал Павел Кузьмин, лучший программист!", "Информация о программе", JOptionPane.INFORMATION_MESSAGE);
     }
 }
