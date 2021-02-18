@@ -114,7 +114,6 @@ public class View extends JFrame implements ActionListener {
 
     public void selectedTabChanged(){
         int ind = tabbedPane.getSelectedIndex();
-        //String text = "";
         if (ind == 0){
             controller.setPlainText(plainTextPane.getText());
         } if (ind == 1) {
