@@ -8,6 +8,7 @@ import javax.swing.text.html.HTMLEditorKit;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 
 public class Controller {
     private View view;
@@ -58,5 +59,18 @@ public class Controller {
         } catch (Exception e) {
             ExceptionHandler.log(e);
         }
+    }
+
+    public String getPlainText(){
+        StringWriter stringWriter = new StringWriter();
+        HTMLEditorKit editorKit = new HTMLEditorKit();
+        String result = "";
+        try {
+            editorKit.write(stringWriter, document,0, document.getLength());
+            result = stringWriter.toString();
+        } catch (Exception e) {
+            ExceptionHandler.log(e);
+        }
+        return result;
     }
 }
