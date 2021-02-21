@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class Solution {
     public static void main(String[] args) {
         System.out.println(getValue(1.1d, 1.2d));
+        
     }
 
     public static BigDecimal getValue(double v1, double v2) {
