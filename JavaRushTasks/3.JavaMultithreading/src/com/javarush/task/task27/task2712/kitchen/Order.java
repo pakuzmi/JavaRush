@@ -30,8 +30,24 @@ public class Order {
         }
         result.append("] of ");
         result.append(tablet.toString());
+        result.append(", cooking time ");
+        result.append(getTotalCookingTime());
+        result.append("min");
+
         return result.toString();
         }
         return "";
+    }
+
+    public int getTotalCookingTime(){
+        int result = 0;
+        for (Dish dish : dishes){
+            result += dish.getDuration();
+        }
+        return result;
+    }
+
+    public boolean isEmpty(){
+        return dishes.size() == 0;
     }
 }
