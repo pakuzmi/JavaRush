@@ -21,11 +21,11 @@ public class ConsoleHelper {
 
     public static List<Dish> getAllDishesForOrder() throws IOException {
         List<Dish> order = new ArrayList<>();
-        writeMessage("Список всех блюд:");
+        writeMessage("Меню:");
         writeMessage("=============================================================");
         writeMessage(Dish.allDishesToString());
         writeMessage("=============================================================");
-        writeMessage("Введите блюдо из предложено списка для добавления его в заказ (exit для завершения выбора).");
+        writeMessage("Введите блюдо из меню для добавления его в заказ (exit для завершения выбора).");
         List<String> enumEntryString = new ArrayList<>();
         for (Dish dish : Dish.values()){
             enumEntryString.add(dish.name());
