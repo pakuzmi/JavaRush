@@ -1,5 +1,7 @@
 package com.javarush.task.task27.task2712.ad;
 
+import com.javarush.task.task27.task2712.ConsoleHelper;
+
 public class Advertisement {
     private Object content;
     private String name;
@@ -40,5 +42,14 @@ public class Advertisement {
             throw new UnsupportedOperationException();
         }
         hits--;
+    }
+
+    public long getAmountPerOneSecondDisplaying(){
+        return amountPerOneDisplaying * 1000 / duration;
+    }
+
+    @Override
+    public String toString() {
+        return name + " is displaying... " + amountPerOneDisplaying + ", " + getAmountPerOneSecondDisplaying();
     }
 }
