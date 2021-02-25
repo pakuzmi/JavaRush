@@ -30,16 +30,4 @@ public class Cook extends Observable implements Observer{
         setChanged();
         notifyObservers(arg);
     }
-/*    @Override
-    public void update(Observable o, Object arg) {
-        Order order = (Order) arg;
-        ConsoleHelper.writeMessage("Start cooking - " + arg + ", cooking time " + order.getTotalCookingTime() + "min");
-        StatisticManager.getInstance().register(new CookedOrderEventDataRow(
-                o.toString(),
-                this.name,
-                order.getTotalCookingTime()*60,
-                order.getDishes()));
-        setChanged();
-        notifyObservers(arg);
-    }*/
 }
