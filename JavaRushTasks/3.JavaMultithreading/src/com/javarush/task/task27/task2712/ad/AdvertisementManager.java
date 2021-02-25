@@ -1,6 +1,9 @@
 package com.javarush.task.task27.task2712.ad;
 
 import com.javarush.task.task27.task2712.ConsoleHelper;
+import com.javarush.task.task27.task2712.statistic.StatisticManager;
+import com.javarush.task.task27.task2712.statistic.event.NoAvailableVideoEventDataRow;
+import com.javarush.task.task27.task2712.statistic.event.VideoSelectedEventDataRow;
 
 import java.util.*;
 
@@ -18,6 +21,7 @@ public class AdvertisementManager {
     public void processVideos() throws NoVideoAvailableException{
         List<Advertisement> ads = new ArrayList<>();
         if(storage.list().isEmpty()){
+            StatisticManager.getInstance().register(new NoAvailableVideoEventDataRow(maxDuration));
             throw new NoVideoAvailableException();
         }
 
@@ -29,6 +33,12 @@ public class AdvertisementManager {
 
         makeAllLists(ads);
         sortByAmountDuration(bestAdvertisement);
+        long amount = getMaxAmount(bestAdvertisement);
+        int duration = getMaxDuration(bestAdvertisement);
+
+        StatisticManager statisticManager = StatisticManager.getInstance();
+        VideoSelectedEventDataRow videoSelectedEventDataRow = new VideoSelectedEventDataRow(bestAdvertisement, amount, duration);
+        statisticManager.register(videoSelectedEventDataRow);
 
         for (Advertisement bestAd: bestAdvertisement) {
             ConsoleHelper.writeMessage(bestAd.toString());

@@ -7,13 +7,8 @@ public class Restaurant {
     public static void main(String[] args) {
         Tablet tablet = new Tablet(12);
         Cook cook = new Cook("Amigo");
-        cook.addObserver(new Waiter());
         tablet.addObserver(cook);
-
         tablet.createOrder();
-        tablet.createOrder();
-        tablet.createOrder();
-        tablet.createOrder();
-
+        cook.addObserver(new Waiter());
     }
 }

@@ -37,9 +37,9 @@ public class Advertisement {
         return amountPerOneDisplaying;
     }
 
-    public void revalidate() throws UnsupportedOperationException{
+    public void revalidate() throws NoVideoAvailableException{
         if (hits <= 0){
-            throw new UnsupportedOperationException();
+            throw new NoVideoAvailableException();
         }
         hits--;
     }
