@@ -12,6 +12,9 @@ public class CookedOrderEventDataRow implements EventDataRow{
     private List<Dish> cookingDishes;
     private Date currentDate;
 
+    public String getCookName() {
+        return cookName;
+    }
 
     public CookedOrderEventDataRow(String tabletName, String cookName, int cookingTimeSeconds, List<Dish> cookingDishes) {
         this.tabletName = tabletName;
@@ -20,6 +23,15 @@ public class CookedOrderEventDataRow implements EventDataRow{
         this.cookingDishes = cookingDishes;
         this.currentDate = new Date();
     }
+
+/*    //Метод для теста, потом удалить!!!!!
+    public CookedOrderEventDataRow(String tabletName, String cookName, int cookingTimeSeconds, List<Dish> cookingDishes, Date date) {
+        this.tabletName = tabletName;
+        this.cookName = cookName;
+        this.cookingTimeSeconds = cookingTimeSeconds;
+        this.cookingDishes = cookingDishes;
+        this.currentDate = date;
+    }*/
 
     @Override
     public Date getDate() {

@@ -11,6 +11,19 @@ public class VideoSelectedEventDataRow implements EventDataRow{
     private int totalDuration;
     private Date currentDate;
 
+    public long getAmount() {
+        return amount;
+    }
+
+/*//    Метод для теста, потом удалить!!!!!
+    public VideoSelectedEventDataRow(List<Advertisement> optimalVideoSet, long amount, int totalDuration, Date date) {
+        this.optimalVideoSet = optimalVideoSet;
+        this.amount = amount;
+        this.totalDuration = totalDuration;
+        //this.currentDate = new Date();
+        this.currentDate = date;
+    }*/
+
     public VideoSelectedEventDataRow(List<Advertisement> optimalVideoSet, long amount, int totalDuration) {
         this.optimalVideoSet = optimalVideoSet;
         this.amount = amount;
