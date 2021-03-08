@@ -15,8 +15,11 @@ public class Restaurant {
 
         tablet.addObserver(cook);
 
-        //tablet.createOrder();
-        tablet.createTestOrder();
+        tablet.createOrder();
+        tablet.createOrder();
+        tablet.createOrder();
+        tablet.createOrder();
+        //tablet.createTestOrder();
 
         cook.addObserver(new Waiter());
 

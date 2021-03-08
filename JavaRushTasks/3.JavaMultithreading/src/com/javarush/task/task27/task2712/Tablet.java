@@ -21,13 +21,25 @@ public class Tablet extends Observable {
     public Order createOrder(){
         try {
             Order order = new Order(this);
-            prepareOrder(order);
+            ConsoleHelper.writeMessage(order.toString());
+            if (!order.isEmpty()) {
+                setChanged();
+                notifyObservers(order);
+            }
+            AdvertisementManager advertisementManager = new AdvertisementManager(order.getTotalCookingTime()*60);
+            try{
+                advertisementManager.processVideos();
+            } catch (NoVideoAvailableException e){
+                logger.log(Level.INFO, "No video is available for the order " + order);
+            }
             return order;
         } catch (IOException e){
             logger.log(Level.SEVERE, "Console is unavailable.");
             return null;
         }
     }
+
+
 
     public void createTestOrder(){
         try {
