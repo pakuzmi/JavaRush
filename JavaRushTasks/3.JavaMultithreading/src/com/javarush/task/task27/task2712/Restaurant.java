@@ -14,6 +14,12 @@ public class Restaurant {
     public static void main(String[] args) throws InterruptedException {
 /*        Tablet tablet = new Tablet(12);
         Cook cook = new Cook("Amigo");
+
+        tablet.addObserver(cook);
+
+        //tablet.createOrder();
+        tablet.createTestOrder();
+
         cook.addObserver(new Waiter());
         tablet.addObserver(cook);
 
