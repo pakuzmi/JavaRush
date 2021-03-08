@@ -14,12 +14,6 @@ public class Restaurant {
     public static void main(String[] args) throws InterruptedException {
 /*        Tablet tablet = new Tablet(12);
         Cook cook = new Cook("Amigo");
-
-        tablet.addObserver(cook);
-
-        //tablet.createOrder();
-        tablet.createTestOrder();
-
         cook.addObserver(new Waiter());
         tablet.addObserver(cook);
 
@@ -35,10 +29,10 @@ public class Restaurant {
         manager.register(firstCook);
         manager.register(secondCook);
         List<Tablet> tablets = new ArrayList<>();
+        OrderManager orderManager = new OrderManager();
         for (int i = 1; i <= 5; i++){
             Tablet tablet = new Tablet(i);
-            tablet.addObserver(firstCook);
-            tablet.addObserver(secondCook);
+            tablet.addObserver(orderManager);
             tablets.add(tablet);
         }
         Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));
