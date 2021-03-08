@@ -3,7 +3,6 @@ import com.javarush.task.task27.task2712.ConsoleHelper;
 import com.javarush.task.task27.task2712.Tablet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -27,23 +26,23 @@ public class Order {
     @Override
     public String toString() {
         if (dishes.size() > 0){
-        StringBuilder result = new StringBuilder();
-        result.append("Your order: [");
-        int i = 1;
-        for (Dish dish : dishes){
-            result.append(dish.name());
-            if (i < dishes.size()){
-                result.append(", ");
+            StringBuilder result = new StringBuilder();
+            result.append("Your order: [");
+            int i = 1;
+            for (Dish dish : dishes){
+                result.append(dish.name());
+                if (i < dishes.size()){
+                    result.append(", ");
+                }
+                i++;
             }
-            i++;
-        }
-        result.append("] of ");
-        result.append(tablet.toString());
-        result.append(", cooking time ");
-        result.append(getTotalCookingTime());
-        result.append("min");
+            result.append("] of ");
+            result.append(tablet.toString());
+            result.append(", cooking time ");
+            result.append(getTotalCookingTime());
+            result.append("min");
 
-        return result.toString();
+            return result.toString();
         }
         return "";
     }
