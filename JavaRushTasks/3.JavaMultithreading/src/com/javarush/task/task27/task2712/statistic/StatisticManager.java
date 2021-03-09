@@ -17,13 +17,8 @@ import java.util.stream.Collectors;
 public class StatisticManager {
     private static StatisticManager instance;
     private StatisticManager.StatisticStorage statisticStorage = new StatisticStorage();
-    private Set<Cook> cooks = new HashSet<>();
 
     private StatisticManager() {
-    }
-
-    public void register(Cook cook){
-        cooks.add(cook);
     }
 
     public static StatisticManager getInstance(){
@@ -130,7 +125,4 @@ public class StatisticManager {
         }
     }
 
-    public Set<Cook> getCooks() {
-        return cooks;
-    }
 }
