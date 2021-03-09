@@ -7,6 +7,7 @@ import java.util.Observer;
 
 public class Cook extends Observable {
     private String name;
+    private boolean busy;
 
     public Cook(String name) {
         this.name = name;
@@ -18,8 +19,19 @@ public class Cook extends Observable {
     }
 
     public void startCookingOrder(Order order){
+        busy = true;
         ConsoleHelper.writeMessage("Start cooking - " + order.toString());
+        try {
+            Thread.sleep(order.getTotalCookingTime() * 10L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         setChanged();
         notifyObservers(order);
+        busy = false;
+    }
+
+    public boolean isBusy() {
+        return busy;
     }
 }

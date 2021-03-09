@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class TestOrder extends Order{
     @Override
     protected void initDishes() {
+        /*dishes = new ArrayList<>();
         int count = (int) (Math.random() * 5);
-        dishes = new ArrayList<>(count);
         while (count > 0){
             int type = (int) (Math.random() * 5);
             count--;
@@ -35,7 +35,13 @@ public class TestOrder extends Order{
                     break;
                 }
             }
-        }
+        }*/
+
+            dishes = new ArrayList<>();
+            int countOfDishes = (int) (Math.random() * Dish.values().length);
+            for (int i = 0; i < countOfDishes; i++) {
+                dishes.add(Dish.values()[(int) (Math.random() * Dish.values().length)]);
+            }
 
     }
 

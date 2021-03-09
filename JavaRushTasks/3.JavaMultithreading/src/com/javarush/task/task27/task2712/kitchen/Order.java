@@ -3,6 +3,7 @@ import com.javarush.task.task27.task2712.ConsoleHelper;
 import com.javarush.task.task27.task2712.Tablet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -60,6 +61,7 @@ public class Order {
     }
 
     protected void initDishes() throws IOException{
+        dishes = new ArrayList<>();
         dishes = ConsoleHelper.getAllDishesForOrder();
     }
 }
