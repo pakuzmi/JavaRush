@@ -1,8 +1,8 @@
 package com.javarush.task.task32.task3209;
 
-import com.javarush.task.task32.task3209.listeners.FrameListener;
-import com.javarush.task.task32.task3209.listeners.TabbedPaneChangeListener;
-import com.javarush.task.task32.task3209.listeners.UndoListener;
+import com.javarush.task.task32.task3209.listeners.*;
+//import com.javarush.task.task32.task3209.listeners.TabbedPaneChangeListener;
+//import com.javarush.task.task32.task3209.listeners.UndoListener;
 
 import javax.swing.*;
 import javax.swing.text.html.HTMLDocument;
