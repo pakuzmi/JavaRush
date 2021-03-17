@@ -6,10 +6,13 @@ import java.util.List;
 public class Model {
     private static final int FIELD_WIDTH = 4;
     private Tile[][] gameTiles = new Tile[FIELD_WIDTH][FIELD_WIDTH];
-
+    int score; //текущий счет
+    int maxTile; //максимальный вес плитки
 
     public Model() {
         resetGameTiles();
+        score = 0;
+        maxTile = 0;
     }
 
     private List<Tile> getEmptyTiles(){
@@ -39,5 +42,29 @@ public class Model {
         }
         addTile();
         addTile();
+    }
+
+    private void compressTiles(Tile[] tiles){
+        for (int i = 0; i < tiles.length; i++){
+            for (int j = 0; j < tiles.length - 1; j++){
+                if (tiles[j].value == 0){
+                    tiles[j].value = tiles[j+1].value;
+                    tiles[j+1].value = 0;
+                }
+            }
+        }
+    }
+
+    private void mergeTiles(Tile[] tiles){
+        for (int i = 0; i < tiles.length - 1; i++){
+            if (tiles[i].value == tiles[i+1].value){
+                int sum = tiles[i].value * 2;
+                tiles[i].value = sum;
+                tiles[i+1].value = 0;
+                score += sum;
+                maxTile = sum > maxTile ? sum : maxTile;
+            }
+        }
+        compressTiles(tiles);
     }
 }
