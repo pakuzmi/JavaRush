@@ -44,27 +44,48 @@ public class Model {
         addTile();
     }
 
-    private void compressTiles(Tile[] tiles){
+    private boolean compressTiles(Tile[] tiles){
+        boolean result = false;
         for (int i = 0; i < tiles.length; i++){
             for (int j = 0; j < tiles.length - 1; j++){
-                if (tiles[j].value == 0){
+                if (tiles[j].value == 0 && tiles[j+1].value != 0){
                     tiles[j].value = tiles[j+1].value;
                     tiles[j+1].value = 0;
+                    result = true;
                 }
             }
         }
+        return result;
     }
 
-    private void mergeTiles(Tile[] tiles){
+    private boolean mergeTiles(Tile[] tiles){
+        boolean result = false;
         for (int i = 0; i < tiles.length - 1; i++){
-            if (tiles[i].value == tiles[i+1].value){
+            if ((tiles[i].value !=0) && (tiles[i].value == tiles[i+1].value)){
                 int sum = tiles[i].value * 2;
                 tiles[i].value = sum;
                 tiles[i+1].value = 0;
                 score += sum;
-                maxTile = sum > maxTile ? sum : maxTile;
+                maxTile = Math.max(sum, maxTile);
+                result = true;
             }
         }
-        compressTiles(tiles);
+        result |= compressTiles(tiles);
+        return result;
+    }
+
+    public void left(){
+        boolean isChanged = false;
+        for (int y = 0; y < gameTiles.length; y++){
+            if (compressTiles(gameTiles[y])){
+                isChanged = true;
+            }
+            if (mergeTiles(gameTiles[y])){
+                isChanged = true;
+            }
+        }
+        if (isChanged){
+            addTile();
+        }
     }
 }
