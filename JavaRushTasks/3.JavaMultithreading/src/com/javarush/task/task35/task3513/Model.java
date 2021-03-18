@@ -9,6 +9,10 @@ public class Model {
     int score; //текущий счет
     int maxTile; //максимальный вес плитки
 
+    public Tile[][] getGameTiles() {
+        return gameTiles;
+    }
+
     public Model() {
         resetGameTiles();
         score = 0;
@@ -125,5 +129,21 @@ public class Model {
             }
         }
         gameTiles = rotatedTiles;
+     }
+
+     public boolean canMove(){
+        boolean result = false;
+        if (getEmptyTiles().size() > 0) {
+            result = true;
+        }
+        for (int y = 0; y < FIELD_WIDTH - 1; y++){
+            for (int x = 0; x < FIELD_WIDTH - 1; x++){
+                if (gameTiles[y][x].value == gameTiles[y][x+1].value || gameTiles[y][x].value == gameTiles[y+1][x].value){
+                    result = true;
+                }
+            }
+        }
+
+        return result;
      }
 }
