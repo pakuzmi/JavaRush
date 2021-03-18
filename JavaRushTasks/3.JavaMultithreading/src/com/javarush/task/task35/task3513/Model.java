@@ -88,4 +88,42 @@ public class Model {
             addTile();
         }
     }
+
+    public void down(){
+        rotate();
+        left();
+        rotate();
+        rotate();
+        rotate();
+    }
+
+    public void right(){
+        rotate();
+        rotate();
+        left();
+        rotate();
+        rotate();
+    }
+
+    public void up(){
+        rotate();
+        rotate();
+        rotate();
+        left();
+        rotate();
+    }
+
+    private void rotate(){
+       /*Tile[][] testTiles = {{new Tile(1), new Tile(2), new Tile(3), new Tile(4)},
+                            {new Tile(0), new Tile(0), new Tile(0), new Tile(6)},
+                            {new Tile(3), new Tile(1), new Tile(2), new Tile(7)},
+                            {new Tile(5), new Tile(6), new Tile(3), new Tile(2)}};*/
+        Tile[][] rotatedTiles = new Tile[FIELD_WIDTH][FIELD_WIDTH];
+        for (int y = 0; y < FIELD_WIDTH; y++){
+            for (int x = 0; x < FIELD_WIDTH; x++){
+                rotatedTiles[y][x] = gameTiles[FIELD_WIDTH - 1 - x][y];
+            }
+        }
+        gameTiles = rotatedTiles;
+     }
 }

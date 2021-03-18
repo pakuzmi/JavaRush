@@ -5,9 +5,7 @@ public class Main {
 /*        Model model = new Model();
         model.resetGameTiles();
         Tile[] tiles = {new Tile(4), new Tile(0), new Tile(0), new Tile(4) };
-        boolean result1 = model.compressTiles(tiles);
-        boolean result2 = model.mergeTiles(tiles);
-
+        model.rotate();
 
         System.out.println("");*/
     }
