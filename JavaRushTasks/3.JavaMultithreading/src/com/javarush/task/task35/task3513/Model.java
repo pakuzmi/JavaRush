@@ -2,12 +2,16 @@ package com.javarush.task.task35.task3513;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Model {
     private static final int FIELD_WIDTH = 4;
-    private Tile[][] gameTiles = new Tile[FIELD_WIDTH][FIELD_WIDTH];
+    private Tile[][] gameTiles = new Tile[FIELD_WIDTH][FIELD_WIDTH]; //Состояние игрового поля
     int score; //текущий счет
     int maxTile; //максимальный вес плитки
+    private Stack<Tile[][]> previousStates = new Stack<>();
+    private Stack<Integer> previousScores = new Stack<>();
+    private boolean isSaveNeeded = true;
 
     public Tile[][] getGameTiles() {
         return gameTiles;
@@ -146,4 +150,20 @@ public class Model {
                 
         return result;
      }
+
+    private void saveState(Tile[][] tiles){
+        Tile[][] tilesToSave = tiles.clone();
+        previousStates.push(tilesToSave);
+        previousScores.push(score);
+        isSaveNeeded = false;
+    }
+
+    public void rollback(){
+        if (!previousStates.empty() && !previousScores.empty()) {
+            gameTiles = previousStates.pop();
+            score = previousScores.pop();
+        }
+    }
+
+
 }
