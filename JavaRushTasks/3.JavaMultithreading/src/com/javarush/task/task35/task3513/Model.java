@@ -84,6 +84,10 @@ public class Model {
 
     public void left(){
         boolean isChanged = false;
+        if (isSaveNeeded){
+            saveState(gameTiles);
+            isSaveNeeded = false;
+        }
         for (int y = 0; y < gameTiles.length; y++){
             if (compressTiles(gameTiles[y])){
                 isChanged = true;
@@ -95,9 +99,11 @@ public class Model {
         if (isChanged){
             addTile();
         }
+        isSaveNeeded = true;
     }
 
     public void down(){
+        saveState(gameTiles);
         rotate();
         left();
         rotate();
@@ -106,6 +112,7 @@ public class Model {
     }
 
     public void right(){
+        saveState(gameTiles);
         rotate();
         rotate();
         left();
@@ -114,6 +121,7 @@ public class Model {
     }
 
     public void up(){
+        saveState(gameTiles);
         rotate();
         rotate();
         rotate();
@@ -122,10 +130,6 @@ public class Model {
     }
 
     private void rotate(){
-       /*Tile[][] testTiles = {{new Tile(1), new Tile(2), new Tile(3), new Tile(4)},
-                            {new Tile(0), new Tile(0), new Tile(0), new Tile(6)},
-                            {new Tile(3), new Tile(1), new Tile(2), new Tile(7)},
-                            {new Tile(5), new Tile(6), new Tile(3), new Tile(2)}};*/
         Tile[][] rotatedTiles = new Tile[FIELD_WIDTH][FIELD_WIDTH];
         for (int y = 0; y < FIELD_WIDTH; y++){
             for (int x = 0; x < FIELD_WIDTH; x++){
@@ -152,7 +156,12 @@ public class Model {
      }
 
     private void saveState(Tile[][] tiles){
-        Tile[][] tilesToSave = tiles.clone();
+        Tile[][] tilesToSave = new Tile[FIELD_WIDTH][FIELD_WIDTH];
+        for (int y = 0; y < FIELD_WIDTH; y++){
+            for (int x = 0; x < FIELD_WIDTH; x++){
+                tilesToSave[y][x] = new Tile(tiles[y][x].value);
+            }
+        }
         previousStates.push(tilesToSave);
         previousScores.push(score);
         isSaveNeeded = false;
