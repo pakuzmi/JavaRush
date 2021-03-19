@@ -62,6 +62,10 @@ public class Controller extends KeyAdapter {
                     model.rollback();
                     break;
                 }
+                case KeyEvent.VK_R:{
+                    model.randomMove();
+                    break;
+                }
             }
             if (model.maxTile == WINNING_TILE){
                 view.isGameWon = true;
