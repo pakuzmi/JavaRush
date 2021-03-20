@@ -196,4 +196,39 @@ public class Model {
         }
     }
 
+    /**
+     *Возвращает true, в случае, если вес плиток в массиве gameTiles отличается от веса плиток
+     *в верхнем массиве стека previousStates
+     * @return true если вес отличается, иначе false
+     */
+
+    public boolean hasBoardChanged(){
+        boolean result = false;
+        Tile[][] previousTiles = previousStates.peek();
+        for (int y = 0; y < FIELD_WIDTH; y++){
+            for (int x = 0; x < FIELD_WIDTH; x++){
+              if (gameTiles[y][x].value != previousTiles[y][x].value){
+                  result = true;
+              }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Принимает один параметр типа move, и возвращает объект типа MoveEfficiency описывающий эффективность переданного хода
+     * @param move - ход эффективность которого оценивается
+     * @return - объект описывающий эффективность переданного хода
+     */
+    public MoveEfficiency getMoveEfficiency(Move move){
+        move.move();
+        MoveEfficiency moveEfficiency = new MoveEfficiency(getEmptyTiles().size(), score, move);
+        if (!hasBoardChanged()){
+            moveEfficiency = new MoveEfficiency(-1, 0, move);
+        }
+        rollback();
+
+        return moveEfficiency;
+    }
 }
