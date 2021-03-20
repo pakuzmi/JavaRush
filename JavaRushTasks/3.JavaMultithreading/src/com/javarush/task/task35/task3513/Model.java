@@ -1,8 +1,6 @@
 package com.javarush.task.task35.task3513;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Model {
     private static final int FIELD_WIDTH = 4;
@@ -201,7 +199,6 @@ public class Model {
      *в верхнем массиве стека previousStates
      * @return true если вес отличается, иначе false
      */
-
     public boolean hasBoardChanged(){
         boolean result = false;
         Tile[][] previousTiles = previousStates.peek();
@@ -230,5 +227,22 @@ public class Model {
         rollback();
 
         return moveEfficiency;
+    }
+
+    /**
+     *  Выбирает лучший из возможных ходов и выполняет его
+     */
+    public void autoMove(){
+        PriorityQueue<MoveEfficiency> queue = new PriorityQueue<>(4, Collections.reverseOrder());
+        queue.offer(getMoveEfficiency(this::left));
+        queue.offer(getMoveEfficiency(this::right));
+        queue.offer(getMoveEfficiency(this::up));
+        queue.offer(getMoveEfficiency(this::down));
+        try {
+            queue.peek().getMove().move();
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
     }
 }
